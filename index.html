@@ -441,5 +441,16 @@
       </div>
     </footer>
 
+    <script>
+      // Client-presentation theme switcher: ?theme=slate|clay|coral|wine
+      // No parameter → default "Moss" palette.
+      (function () {
+        var theme = new URLSearchParams(location.search).get("theme");
+        if (["slate", "clay", "coral", "wine"].indexOf(theme) !== -1) {
+          document.documentElement.dataset.theme = theme;
+        }
+      })();
+    </script>
+
 </body>
 </html>

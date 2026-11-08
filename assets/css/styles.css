@@ -16,6 +16,9 @@
   --wash-cta: #E0E5D6;   /* inquiry section */
   --white: #FFFFFF;
 
+  /* Derivative accent (solid button bg / hover) */
+  --accent-strong: #46522F;
+
   /* Type */
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "Roboto Mono", ui-monospace, monospace;
@@ -260,7 +263,7 @@ details[open] > summary .icon-faq {
 }
 
 .btn--solid:hover {
-  background: #46522F;
+  background: var(--accent-strong);
 }
 
 .btn--solid .icon-sm {
@@ -1051,4 +1054,74 @@ details[open] > summary .icon-faq {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* ============================================================
+   Theme variants (client presentation)
+   Activate with ?theme=slate|clay|coral|wine in the URL.
+   Only color tokens are overridden — layout stays identical.
+   Default theme without a parameter: Moss (the values above).
+   ============================================================ */
+
+/* --- Slate: cool, industrial blue-slate --- */
+:root[data-theme="slate"] {
+  --paper: #F4F5F7;
+  --ink: #22262B;
+  --muted: #5F6572;
+  --accent: #42566B;
+  --accent-strong: #34455A;
+  --line: #D6DBE0;
+  --line-dark: #4E5A66;
+  --dark: #2B313A;
+  --dark-text: #E7EAED;
+  --wash: #E9ECEF;
+  --wash-cta: #DFE5EA;
+}
+
+/* --- Clay: warm terracotta on cream --- */
+:root[data-theme="clay"] {
+  --paper: #F8F2E9;
+  --ink: #2E2823;
+  --muted: #7C6455;
+  --accent: #96543B;
+  --accent-strong: #7A4430;
+  --line: #E4D6C3;
+  --line-dark: #6B5443;
+  --dark: #3A312B;
+  --dark-text: #F0E9E2;
+  --wash: #EFE5D6;
+  --wash-cta: #EFE0CC;
+}
+
+/* --- Coral: client palette feeac9/ffcdc9/fdacac/fd7979 ---
+   #FD7979 itself is too light for small text (≈2.2:1), so ink/caption
+   foregrounds use the darkened coral below while decorations keep the
+   palette washes. Solid button bg uses --accent for white-text contrast. */
+:root[data-theme="coral"] {
+  --paper: #FEEAC9;
+  --ink: #4A2620;
+  --muted: #8A5F4B;
+  --accent: #BE4242;
+  --accent-strong: #A93636;
+  --line: #F0D8B6;
+  --line-dark: #9A5A57;
+  --dark: #7A3438;
+  --dark-text: #FFE9E4;
+  --wash: #FFCDC9;
+  --wash-cta: #FDACAC;
+}
+
+/* --- Wine: client palette fcf5ee/ffc4c4/ee6983/850e35 --- */
+:root[data-theme="wine"] {
+  --paper: #FCF5EE;
+  --ink: #2E1219;
+  --muted: #7C4B53;
+  --accent: #850E35;
+  --accent-strong: #6B0A2A;
+  --line: #F1D9DA;
+  --line-dark: #A04A5E;
+  --dark: #4A0F26;
+  --dark-text: #F5E2E6;
+  --wash: #FFC4C4;
+  --wash-cta: #F5CFD3;
 }
