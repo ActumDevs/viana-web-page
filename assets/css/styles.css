@@ -1069,7 +1069,7 @@ details[open] > summary .icon-faq {
 /* --- Slate: cool, industrial blue-slate --- */
 :root[data-theme="slate"] {
   --paper: #F4F5F7;
-  --ink: #22262B;
+  --ink: #671E4B;
   --muted: #5F6572;
   --accent: #42566B;
   --accent-strong: #34455A;
