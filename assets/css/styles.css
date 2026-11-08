@@ -1,0 +1,1054 @@
+/* ============================================================
+   A. C. Viana Pedras — homepage styles
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --paper: #F6F5F0;      /* page background */
+  --ink: #262922;        /* primary text */
+  --muted: #6C7065;      /* secondary text */
+  --accent: #536044;     /* green — links, markers, solid button */
+  --line: #D3D6CB;       /* hairline borders */
+  --line-dark: #51574A;  /* hairlines on dark */
+  --dark: #292E26;       /* machinery section */
+  --dark-text: #E9ECE2;  /* text on dark */
+  --wash: #ECECE5;       /* responsibility section */
+  --wash-cta: #E0E5D6;   /* inquiry section */
+  --white: #FFFFFF;
+
+  /* Type */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, monospace;
+}
+
+/* ---------- Reset ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ---------- Icons (SVG masks, colored via currentColor) ---------- */
+
+.icon {
+  display: inline-block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.icon-sm {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-mark {
+  --icon: url("../icons/stone-mark.svg");
+  width: 28px;
+  height: 30px;
+}
+
+.icon-arrow-right {
+  --icon: url("../icons/arrow-right.svg");
+}
+
+.icon-arrow-up-right {
+  --icon: url("../icons/arrow-up-right.svg");
+}
+
+.icon--light {
+  background: var(--white);
+}
+
+/* FAQ +/− glyph swaps on open */
+.icon-faq {
+  --icon: url("../icons/plus.svg");
+  width: 18px;
+  height: 18px;
+}
+
+details[open] > .icon-faq,
+details[open] > summary .icon-faq {
+  --icon: url("../icons/minus.svg");
+}
+
+/* ---------- Type helpers ---------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1091em;
+  color: var(--muted);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1091em;
+}
+
+.mono--small {
+  font-size: 10px;
+}
+
+.mono--tiny {
+  font-size: 10px;
+  letter-spacing: 0.0545em;
+}
+
+.mono--spaced {
+  letter-spacing: 0.0909em;
+}
+
+.mono--ondark {
+  color: var(--dark-text);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.muted--ondark {
+  color: var(--dark-text);
+  opacity: 0.6;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.h-lg {
+  font-size: clamp(34px, 3.33vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.0417em;
+}
+
+.h-md {
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.0306em;
+}
+
+.h-xl {
+  font-size: clamp(38px, 4.45vw, 64px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.0469em;
+}
+
+.lead {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.lead--ondark {
+  color: var(--dark-text);
+  opacity: 0.8;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Shared primitives ---------- */
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row--between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row--top {
+  align-items: flex-start;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Text link: label + arrow */
+.textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.textlink .icon {
+  transition: translate 0.2s ease;
+}
+
+.textlink:hover .icon {
+  translate: 4px 0;
+}
+
+.textlink--ondark {
+  color: var(--dark-text);
+}
+
+/* Buttons (52px pill-less bars) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 32px;
+  height: 52px;
+  padding: 0 22px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn--solid {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--white);
+}
+
+.btn--solid:hover {
+  background: #46522F;
+}
+
+.btn--solid .icon-sm {
+  background: var(--white);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--ghost:hover {
+  background: rgba(38, 41, 34, 0.06);
+}
+
+/* 4px green markers */
+.dot {
+  width: 4px;
+  height: 4px;
+  flex: none;
+  background: var(--accent);
+}
+
+.dot--accent {
+  width: 5px;
+  height: 5px;
+}
+
+/* ============================================================
+   Header — Quarry introduction
+   ============================================================ */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 0 var(--gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand__word {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.0417em;
+}
+
+.nav__primary {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav__primary a,
+.footer__col a {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.nav__primary a:hover,
+.footer__col a:hover {
+  color: var(--accent);
+}
+
+.nav__contact {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav__lang {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 60px var(--gutter) 56px;
+}
+
+.hero__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 80px;
+}
+
+.hero__title {
+  font-size: clamp(42px, 5.56vw, 80px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  max-width: 820px;
+}
+
+.hero__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-bottom: 6px;
+  max-width: 420px;
+}
+
+.panorama {
+  position: relative;
+}
+
+.panorama img {
+  width: 100%;
+  height: clamp(320px, 39.5vw, 568px);
+  object-fit: cover;
+}
+
+.plate {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  width: max-content;
+  max-width: calc(100% - 2 * var(--gutter));
+  padding: 12px 18px;
+  background: var(--paper);
+}
+
+.plate__note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.capabilities {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  border-bottom: 1px solid var(--line);
+  height: 64px;
+  padding: 0 var(--gutter);
+}
+
+.capabilities li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.0545em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+
+:root {
+  --gutter: clamp(20px, 4.45vw, 64px);
+}
+
+.section {
+  padding-inline: var(--gutter);
+}
+
+.split {
+  display: flex;
+  gap: 64px;
+}
+
+.split--labeled {
+  align-items: stretch;
+}
+
+.split--baseline {
+  align-items: flex-end;
+}
+
+.split__label {
+  flex: 0 0 clamp(260px, 26.7vw, 384px);
+}
+
+.split__body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  flex: 1;
+}
+
+.split__body--gap-sm {
+  gap: 24px;
+}
+
+.split__body .lead {
+  max-width: 740px;
+}
+
+/* ============================================================
+   Company overview
+   ============================================================ */
+
+.section--overview {
+  padding-top: 100px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* ============================================================
+   Marble block inventory
+   ============================================================ */
+
+.section--inventory {
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.inventory__intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.cards--blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.block-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.block-card__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.block-card__media img {
+  width: 100%;
+  height: clamp(220px, 22.9vw, 330px);
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  background: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+}
+
+.block-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.block-card__name {
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.0292em;
+}
+
+.specs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.0545em;
+  color: var(--muted);
+}
+
+.stock-note {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  align-items: center;
+}
+
+/* ============================================================
+   Mining machinery (dark)
+   ============================================================ */
+
+.section--machinery {
+  background: var(--dark);
+  color: var(--dark-text);
+  padding-top: 90px;
+  padding-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.eyebrow--ondark {
+  color: var(--dark-text);
+  opacity: 0.85;
+}
+
+.cards--machines {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.machine-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.machine-card__photo {
+  width: 100%;
+  height: clamp(200px, 23.6vw, 340px);
+  object-fit: cover;
+}
+
+.machine-card__tag {
+  letter-spacing: 0.1091em;
+}
+
+.machine-card__name {
+  font-size: clamp(22px, 1.95vw, 28px);
+  font-weight: 400;
+  letter-spacing: -0.0286em;
+}
+
+.specs--machine {
+  border-color: var(--line-dark);
+  padding: 16px 0;
+  gap: 32px;
+  color: var(--dark-text);
+}
+
+.specs--machine dd {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--dark-text);
+}
+
+/* each spec is a caption-over-value column */
+.specs .specs__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.specs--machine + .textlink {
+  color: var(--dark-text);
+}
+
+/* ============================================================
+   Quarry story
+   ============================================================ */
+
+.section--story {
+  display: flex;
+  align-items: center;
+  gap: 88px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.story__media {
+  flex: 0 0 clamp(320px, 43.3vw, 624px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story__media img {
+  height: clamp(320px, 40vw, 580px);
+  width: 100%;
+  object-fit: cover;
+}
+
+.story__narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  flex: 1;
+}
+
+.facts {
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fact__number {
+  font-size: 36px;
+  letter-spacing: -0.0417em;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   Buying process
+   ============================================================ */
+
+.section--process {
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.split--process {
+  padding-top: 36px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+.step__number {
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.step__title {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+/* ============================================================
+   Responsible operations
+   ============================================================ */
+
+.responsibility {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--wash);
+  min-height: 580px;
+}
+
+.responsibility__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 64px var(--gutter);
+}
+
+.responsibility__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.priorities {
+  display: flex;
+  flex-direction: column;
+}
+
+.priorities li {
+  border-top: 1px solid var(--line);
+  padding: 14px 0;
+  gap: 20px;
+}
+
+.priority__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mono--tiny.accent {
+  font-size: 10px;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.section--faq {
+  display: flex;
+  gap: 88px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.faq__intro {
+  flex: 0 0 clamp(300px, 31.1vw, 448px);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.faq__list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+}
+
+.faq__list details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.faq summary::-webkit-details-marker,
+.faq summary::marker {
+  display: none;
+  content: none;
+}
+
+.faq[open] summary .icon-faq {
+  --icon: url("../icons/minus.svg");
+}
+
+.faq__answer {
+  max-width: 650px;
+  padding-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   Project inquiry
+   ============================================================ */
+
+.inquiry {
+  display: flex;
+  gap: 120px;
+  background: var(--wash-cta);
+  padding: 80px var(--gutter);
+}
+
+.inquiry__invitation {
+  flex: 0 1 730px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.inquiry__invitation .lead {
+  max-width: 550px;
+}
+
+.inquiry__options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.inquiry__options .btn--ghost {
+  border-color: var(--line);
+}
+
+.inquiry__contact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+.inquiry__email {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(20px, 1.95vw, 28px);
+  letter-spacing: -0.0321em;
+}
+
+.inquiry__email .icon {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+}
+
+.inquiry__email:hover .icon {
+  translate: 4px -4px;
+}
+
+.inquiry__email .icon {
+  transition: translate 0.2s ease;
+}
+
+.inquiry__phone {
+  font-size: 20px;
+}
+
+.inquiry__hours {
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+.footer {
+  padding: 64px var(--gutter) 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.footer__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 0 1 460px;
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.footer__col--explore {
+  flex: 0 0 200px;
+}
+
+.footer__col--visit {
+  flex: 0 0 240px;
+}
+
+.footer__col--visit p {
+  line-height: 1.8;
+}
+
+.footer__col--social {
+  flex: 0 0 160px;
+}
+
+.footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footer__legal .divider {
+  width: 100%;
+}
+
+.footer__legal-links {
+  display: flex;
+  gap: 28px;
+}
+
+.footer__legal-links a:hover {
+  color: var(--accent);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .hero__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .section--story,
+  .section--faq {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 48px;
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav {
+    height: auto;
+    padding-block: 20px;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+
+  .nav__primary {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .split,
+  .inquiry {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .split__label {
+    flex-basis: auto;
+  }
+
+  .cards--blocks {
+    grid-template-columns: 1fr;
+  }
+
+  .cards--machines {
+    grid-template-columns: 1fr;
+  }
+
+  .responsibility {
+    grid-template-columns: 1fr;
+  }
+
+  .responsibility__photo {
+    height: clamp(280px, 50vw, 580px);
+  }
+
+  .capabilities {
+    height: auto;
+    padding: 12px var(--gutter);
+  }
+}
+
+@media (max-width: 560px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory__intro,
+  .footer__nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
