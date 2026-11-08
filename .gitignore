@@ -1,0 +1,29 @@
+# Rule for this repo: only commit files required to deploy on Cloudflare.
+# Everything else — tooling, credentials, dependencies, build output — stays out.
+
+# Credentials / secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# Dependencies
+node_modules/
+
+# Build output and generated files
+dist/
+build/
+output/
+.wrangler/
+
+# Tooling / agent config (not needed for deploy)
+.opencode/
+opencode.jsonc
+AGENTS.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
