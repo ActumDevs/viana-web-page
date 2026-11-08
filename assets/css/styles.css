@@ -80,11 +80,7 @@ ol {
   height: 18px;
 }
 
-.icon-mark {
-  --icon: url("../icons/stone-mark.svg");
-  width: 28px;
-  height: 30px;
-}
+
 
 .icon-arrow-right {
   --icon: url("../icons/arrow-right.svg");
@@ -310,10 +306,17 @@ details[open] > summary .icon-faq {
   gap: 12px;
 }
 
-.brand__word {
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.0417em;
+.brand__wordmark {
+  display: block;
+  height: 24px;
+  width: auto;
+}
+
+.brand__tagline {
+  margin-top: 6px;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--muted);
 }
 
 .nav__primary {
@@ -1124,4 +1127,20 @@ details[open] > summary .icon-faq {
   --dark-text: #F5E2E6;
   --wash: #FFC4C4;
   --wash-cta: #F5CFD3;
+}
+
+/* --- Viana: brand purple sampled from the company logo (default plum #671E4B) ---
+   Surfaces stay quiet plum-tinted neutrals so the logo purple reads as the hero. */
+:root[data-theme="viana"] {
+  --paper: #F8F3F4;
+  --ink: #2A161F;
+  --muted: #6E505A;
+  --accent: #671E4B;
+  --accent-strong: #50173A;
+  --line: #E6D8DB;
+  --line-dark: #6E3549;
+  --dark: #3B1024;
+  --dark-text: #F2E4E8;
+  --wash: #EFE0E3;
+  --wash-cta: #E7D2D6;
 }

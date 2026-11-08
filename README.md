@@ -45,9 +45,10 @@ All colors are **CSS custom properties** declared once under `:root` in
 icons via `currentColor` masks) derives from these tokens, so the entire site
 re-colors from ~10 values.
 
-### The five palettes
+### The six palettes
 
 Default (no parameter) is **Moss**, the palette from the Figma design.
+**Viana** is the true brand palette, sampled from the company logo.
 
 | Theme   | Activate                 | Character                          |
 | ------- | ------------------------ | ---------------------------------- |
@@ -56,6 +57,7 @@ Default (no parameter) is **Moss**, the palette from the Figma design.
 | Clay    | `/?theme=clay`           | Warm terracotta on cream           |
 | Coral   | `/?theme=coral`          | Client palette peach/blush/coral   |
 | Wine    | `/?theme=wine`           | Client palette cream/rose/burgundy |
+| Viana   | `/?theme=viana`          | Brand purple from the company logo |
 
 Each theme is a `:root[data-theme="…"]` block overriding only color tokens:
 
@@ -95,6 +97,17 @@ anything else silently falls back to Moss.
 
 Delete the four `:root[data-theme=…]` blocks and the `<script>` in
 `index.html` — Moss continues to work untouched as the default.
+
+## Brand assets
+
+`assets/icons/viana-wordmark.svg` and `viana-favicon.svg` are **traced from a
+photo of the old company signage** (`viana_logo_photo.jpg`, untracked) with a
+potrace pipeline — flat single-color plum fill `#671E4B`. The logo's photo
+gradient cannot survive a trace; a flat fill matches how the sign prints.
+**Upgrade path:** when the client supplies the original vector brand asset,
+replace both files with it (wordmark aspect ratio ~4.07:1, header height 24px).
+
+The logo colors also feed the `viana` theme (see palettes above).
 
 ## Design ↔ code workflow (Figma MCP)
 
@@ -138,6 +151,8 @@ bunx wrangler pages deploy . --project-name=viana-site
   the first answer).
 - All copy is English-only; the `EN / SE` language switch is not functional yet.
 - Photography is concept imagery from the design file.
+- The wordmark/favicon are photo traces — replace when the client provides
+  the original vector logo.
 
 ## Toolchain (OpenCode MCP servers)
 
