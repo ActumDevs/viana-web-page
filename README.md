@@ -18,8 +18,10 @@ viana-site/
 ├── index.html              # Homepage (single page so far)
 ├── assets/
 │   ├── css/styles.css      # All styling: tokens, layout, themes
-│   ├── icons/*.svg         # Line icons (stone mark, arrows, +/−)
+│   ├── icons/*.svg         # Arrows, +/−, brand wordmark + favicon
 │   └── images/*.png        # Photography from the Figma file
+├── .opencode/
+│   └── skills/design-review/   # Playwright review-pass skill (local only)
 ├── .env.example            # Template for MCP credentials (not committed)
 ├── .gitignore
 ├── AGENTS.md               # Agent working conventions (local only)
@@ -28,15 +30,88 @@ viana-site/
 
 ## Running locally
 
-Any static file server from the repo root works:
+Any static file server from the repo root works — full instructions in the
+[Usage guide](#usage-guide) below.
+
+## Usage guide
+
+Step-by-step flows for day-to-day work on this site.
+
+### Start the preview server
 
 ```sh
 python3 -m http.server 8321 --bind 127.0.0.1
-# or
-bunx serve -l 8321
 ```
 
-Then open <http://127.0.0.1:8321/>. There is no build/transpile step.
+- Open <http://127.0.0.1:8321/>. The server serves live files — just save and
+  refresh; there is nothing to rebuild.
+- `Address already in use` means a previous instance is still running; since
+  it serves the same live directory, it is normally fine to keep using it.
+  To fully restart: `pkill -f "http.server 8321"`, then run the command again.
+
+### Preview the color palettes
+
+Append `?theme=<id>` to any URL: `slate`, `clay`, `coral`, `wine`, `viana`,
+or load `/` plain for the default Moss. The five presentation links are:
+
+```
+/?theme=slate   /?theme=clay   /?theme=coral   /?theme=wine   /?theme=viana
+```
+
+The theme is read once per page load from the URL — share the exact link to
+present the exact palette. Unknown values silently fall back to Moss.
+
+### Prepare a designer review dossier
+
+Ask the agent to run the `design-review` skill (e.g. *"run a design review"*
+or `/design-review`). Scopes:
+
+| Scope | Result |
+| ----- | ------ |
+| *(none)* | Full pass: 6 themes × 390/1024/1440, close-ups, hover/FAQ states, QA table |
+| `theme:coral` | All viewports for one theme only |
+| `tablet` / `mobile` | Quick single-viewport pass across all themes |
+| `overlay:<figma-export.png>` | Side-by-side + blend overlay against a Figma frame export |
+
+Output is always written to **`/tmp/opencode/design-review/`** — one HTML
+dossier plus a `shots/` folder of screenshots, never inside the repository.
+Open `index.html` directly in a browser; to share it, zip the folder
+(the HTML references its shots). The dossier header records the git commit
+and uncommitted changes the captures reflect, so a reviewer always knows
+what they are looking at.
+
+### Edit content
+
+- All copy lives in `index.html`; sections are commented
+  (`<!-- ===== Section name ===== -->`) in design order: intro/hero,
+  capabilities, overview, marble blocks, machinery, story, process,
+  responsibility, FAQ, inquiry, footer.
+- **Add a marble block card**: copy one `<article class="block-card">…</article>`
+  inside `.cards--blocks`, then edit name/`NM–…` code, variant line,
+  dimensions, weight, and point `img src` at the new photo. The grid is
+  3-up; a fourth card wraps to a new row automatically.
+- **Add a machine listing**: same pattern under `.cards--machines`
+  (2-up grid) — photo, tag, name, spec triple (year / hours / weight).
+- **FAQ**: each question is a `<details class="faq">`; add one and keep the
+  first `open` attribute on whichever question should show expanded by
+  default.
+
+### Replace placeholder assets
+
+| Asset | Current state | How to replace |
+| ----- | ------------- | -------------- |
+| Photography | Concept renders from the Figma file | Drop real photos into `assets/images/` with the same filenames (or update `src`), target display sizes ≈1440×568 (panorama), ~440×330 (cards), ~690×340 (machines), 624×580 (portrait), 720×580 (operations) |
+| Wordmark / favicon | Traced SVGs from the sign photo | Drop in the client's original vector, same filenames, preserve the wordmark's ~4.07:1 aspect ratio |
+| Contact details | `hello@viana.example`, `+46 …`, Quarry Road 12 | Search `index.html` for the placeholder strings and replace |
+
+### Requirement checklist before go-live
+
+1. Replace placeholder contact details + address.
+2. Write final FAQ answers (2–4 are drafted placeholders).
+3. Replace concept photography and, ideally, the traced wordmark.
+4. Decide the final palette and remove the theme switcher (see below).
+5. QA pass (`design-review`) with 0 console/network issues, then commit to
+   `main` and deploy.
 
 ## Color palette system
 
@@ -95,7 +170,7 @@ anything else silently falls back to Moss.
 
 ### Going to production with one palette
 
-Delete the four `:root[data-theme=…]` blocks and the `<script>` in
+Delete the five added `:root[data-theme=…]` blocks and the `<script>` in
 `index.html` — Moss continues to work untouched as the default.
 
 ## Brand assets
@@ -132,6 +207,10 @@ server (Chromium, headless, `--isolated`):
    render matches the Figma frame. Screenshot artifacts live in
    `/tmp/opencode/playwright-mcp/` (outside the repo, never committed).
 
+For reviewers and presentation prep, the same machinery is wrapped in the
+**`design-review` skill** (see *Usage guide → Designer review dossier*),
+which produces the shareable dossier instead of ad-hoc screenshots.
+
 ## Deployment (Cloudflare)
 
 Static site, no build output. Cloudflare Pages / Workers static assets can
@@ -160,3 +239,6 @@ bunx wrangler pages deploy . --project-name=viana-site
 | ------------ | ------------------------------ | ------------------------------- |
 | `framelink`  | Figma design data + assets     | `npx figma-developer-mcp`       |
 | `playwright` | Browser verification           | `bunx @playwright/mcp` headless |
+
+Skills: `design-review` (`.opencode/skills/design-review/`) — Playwright
+review pass producing the designer dossier (local only, not committed).
